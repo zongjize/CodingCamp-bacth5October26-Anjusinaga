@@ -17,8 +17,8 @@ Implement a standalone, client-side productivity dashboard delivered as three fi
   - Create `js/app.js` as an empty IIFE shell: `(function () { 'use strict'; const PPD = {}; })();`
   - _Requirements: 13.1, 13.2, 13.3_
 
-- [ ] 2. Implement `PPD.Storage` module
-  - [-] 2.1 Write the `PPD.Storage` module inside `js/app.js`
+- [x] 2. Implement `PPD.Storage` module
+  - [x] 2.1 Write the `PPD.Storage` module inside `js/app.js`
     - Implement `get(key)`: JSON.parse from localStorage, return `null` on miss or parse error
     - Implement `set(key, value)`: JSON.stringify and write; return `false` if write fails
     - Implement `remove(key)`: delete key from localStorage
@@ -31,8 +31,8 @@ Implement a standalone, client-side productivity dashboard delivered as three fi
     - **Validates: Requirements 10.6**
     - Use fast-check to assert that every key in the `KEYS` object starts with `"ppd_"`
 
-- [ ] 3. Implement `PPD.UI` module
-  - [-] 3.1 Write the `PPD.UI` utility module inside `js/app.js`
+- [x] 3. Implement `PPD.UI` module
+  - [x] 3.1 Write the `PPD.UI` utility module inside `js/app.js`
     - Implement `qs(selector)` and `qsa(selector)` as shorthands for `querySelector` / `querySelectorAll`
     - Implement `showError(el, msg)`: insert or update an `.error-msg` sibling element adjacent to `el`
     - Implement `clearError(el)`: remove `.error-msg` adjacent to `el`
@@ -41,25 +41,25 @@ Implement a standalone, client-side productivity dashboard delivered as three fi
     - Implement `showAlert(msg, durationMs)`: render a timed on-screen alert overlay (timer completion fallback)
     - _Requirements: 10.4, 10.5, 4.7_
 
-- [ ] 4. Implement `PPD.Theme` module and CSS custom properties
-  - [~] 4.1 Write the CSS custom properties and theme selectors in `css/style.css`
+- [x] 4. Implement `PPD.Theme` module and CSS custom properties
+  - [x] 4.1 Write the CSS custom properties and theme selectors in `css/style.css`
     - Define all design tokens under `:root` (light defaults): `--color-bg`, `--color-surface`, `--color-border`, `--color-text`, `--color-text-muted`, `--color-accent`, `--color-accent-alt`, `--color-error`, `--color-success`, `--color-warning`, `--shadow-card`, `--radius-card`, `--font-family`
     - Define dark overrides under `[data-theme="dark"]`
     - _Requirements: 3.3, 11.3_
 
-  - [~] 4.2 Write the `PPD.Theme` module inside `js/app.js`
+  - [x] 4.2 Write the `PPD.Theme` module inside `js/app.js`
     - Implement `detect()`: reads `ppd_theme` from storage → falls back to `prefers-color-scheme` → defaults to `"light"`
     - Implement `apply(theme)`: sets `data-theme` attribute on `<html>`
     - Implement `toggle()`: flips active theme, persists to `ppd_theme`, calls `apply`
     - Implement `current()`: returns the current `data-theme` attribute value
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8_
 
-  - [~] 4.3 Add inline theme-init `<script>` block in `<head>` of `index.html`
+  - [x] 4.3 Add inline theme-init `<script>` block in `<head>` of `index.html`
     - Write a minimal self-contained script (no reference to `PPD`) that reads `ppd_theme` from localStorage, detects `prefers-color-scheme`, and sets `data-theme` on `<html>` before the body renders
     - This must appear after `<link rel="stylesheet">` but before `</head>`
     - _Requirements: 3.5_
 
-  - [~] 4.4 Add the theme toggle button to `index.html` and wire its click handler in `PPD.Theme`
+  - [x] 4.4 Add the theme toggle button to `index.html` and wire its click handler in `PPD.Theme`
     - Add a `<button id="btn-theme-toggle">` inside `index.html`; position it fixed top-right via CSS
     - Wire `onclick` in `PPD.Theme.init()` to call `PPD.Theme.toggle()`
     - _Requirements: 3.1, 3.2_
@@ -69,8 +69,8 @@ Implement a standalone, client-side productivity dashboard delivered as three fi
     - **Validates: Requirements 3.2**
     - Use fast-check with `fc.constantFrom("light", "dark")` to assert two successive `toggle()` calls restore the original theme
 
-- [ ] 5. Implement `PPD.Greeting` module
-  - [~] 5.1 Write pure helper functions in `PPD.Greeting`
+- [x] 5. Implement `PPD.Greeting` module
+  - [x] 5.1 Write pure helper functions in `PPD.Greeting`
     - Implement `getGreetingPrefix(hour)`: returns `"Good morning"` (05–11), `"Good afternoon"` (12–17), `"Good evening"` (18–23 and 00–04)
     - Implement `formatTime(date)`: returns zero-padded `"HH:MM"` string
     - Implement `formatDate(date)`: returns `"Monday, 26 October 2025"` format
@@ -82,7 +82,7 @@ Implement a standalone, client-side productivity dashboard delivered as three fi
     - **Property 2: Greeting with name includes name; without name omits suffix** — use `fc.string({minLength:1, maxLength:50})` and `fc.integer({min:0, max:23})`
     - **Validates: Requirements 1.3, 1.4, 1.5, 1.6, 1.7, 1.8**
 
-  - [~] 5.3 Write `PPD.Greeting.saveName` and `PPD.Greeting.init`
+  - [x] 5.3 Write `PPD.Greeting.saveName` and `PPD.Greeting.init`
     - Implement `saveName(rawInput)`: trim input; if 1–50 chars persist to `ppd_displayName`; if empty remove key; if > 50 return `{ok: false, error: "..."}` without changing storage
     - Implement `render()`: reads current time/date and display name, updates all greeting DOM elements
     - Implement `init()`: reads display name from storage, calls `render()` immediately, starts `setInterval(render, 60_000)`
@@ -94,11 +94,11 @@ Implement a standalone, client-side productivity dashboard delivered as three fi
     - **Validates: Requirements 2.2, 2.5**
     - Use `fc.string({minLength:1, maxLength:50})` and `fc.string({minLength:51})` to assert accept/reject boundary
 
-- [~] 6. Checkpoint — Ensure Storage, UI, Theme, and Greeting pass all tests and render correctly
+- [x] 6. Checkpoint — Ensure Storage, UI, Theme, and Greeting pass all tests and render correctly
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 7. Implement `PPD.Timer` module
-  - [~] 7.1 Write the `PPD.Timer` state machine and `formatDisplay`
+- [x] 7. Implement `PPD.Timer` module
+  - [x] 7.1 Write the `PPD.Timer` state machine and `formatDisplay`
     - Implement `formatDisplay(totalSeconds)`: pure function returning `"MM:SS"` zero-padded
     - Define internal state object: `{ state, sessionDuration, remaining, intervalId, audioCtx }`
     - Implement `start()`: transition `idle/paused → running`, start `setInterval(tick, 1000)`
@@ -112,7 +112,7 @@ Implement a standalone, client-side productivity dashboard delivered as three fi
     - **Validates: Requirements 4.1**
     - Use `fc.integer({min:0, max:5400})` to assert output matches `/^\d{2}:\d{2}$/`
 
-  - [~] 7.3 Write `PPD.Timer.setDuration`, `complete`, `notify`, and `playBeep`
+  - [x] 7.3 Write `PPD.Timer.setDuration`, `complete`, `notify`, and `playBeep`
     - Implement `setDuration(minutes)`: validate 1–90 integer; if timer is running return `{ok: false, error: "..."}`;  persist to `ppd_sessionDuration`; call `reset`
     - Implement `complete()`: set state → `completed`, call `notify`, call `playBeep`
     - Implement `notify()`: request / use `Notification` API; fall back to `PPD.UI.showAlert` if permission denied or unavailable
@@ -124,13 +124,13 @@ Implement a standalone, client-side productivity dashboard delivered as three fi
     - **Validates: Requirements 4.8, 4.10**
     - Use `fc.integer({min:1, max:90})` and `fc.integer().filter(n => n < 1 || n > 90)` to assert accept/reject boundary
 
-  - [~] 7.5 Add timer HTML controls and wire `PPD.Timer.init`
+  - [x] 7.5 Add timer HTML controls and wire `PPD.Timer.init`
     - Add timer display (`#timer-display`), Start / Stop / Reset buttons, and duration numeric input to `index.html` inside `#panel-timer`
     - Implement `init()`: load persisted duration (default 25), render display, wire all button click handlers
     - _Requirements: 4.2, 4.3, 4.4, 4.5_
 
-- [ ] 8. Implement `PPD.Tasks` module
-  - [~] 8.1 Write `PPD.Tasks` data helpers: `isDuplicate`, `sort`, and `persist`
+- [x] 8. Implement `PPD.Tasks` module
+  - [x] 8.1 Write `PPD.Tasks` data helpers: `isDuplicate`, `sort`, and `persist`
     - Implement `isDuplicate(text, excludeId?)`: case-insensitive trimmed match against incomplete tasks only
     - Implement `sort(option)`: pure function returning a sorted copy; sort options: `default`, `az`, `za`, `incomplete_first`, `complete_first`; tie-break by `createdAt` ascending
     - Implement `persist()`: write tasks array to `ppd_tasks` via `PPD.Storage.set`; return success boolean
@@ -143,7 +143,7 @@ Implement a standalone, client-side productivity dashboard delivered as three fi
     - **Property 11: Sorting does not mutate persisted task order** — after `setSort(option)`, assert `PPD.Storage.get(KEYS.TASKS)` order is unchanged
     - **Validates: Requirements 5.3, 6.4, 8.2, 8.5**
 
-  - [~] 8.3 Write `PPD.Tasks.add`, `edit`, `toggle`, `delete`, and `render`
+  - [x] 8.3 Write `PPD.Tasks.add`, `edit`, `toggle`, `delete`, and `render`
     - Implement `add(rawText)`: validate 1–200 chars (reject silently if empty; show error if > 200); check duplicate; append new Task; persist; re-render
     - Implement `edit(id, rawText)`: validate 1–200 chars; check duplicate against other tasks; update description; persist within 500 ms; re-render; on persist failure show error and revert
     - Implement `toggle(id)`: flip `completed`; persist within 500 ms; re-render
@@ -161,17 +161,17 @@ Implement a standalone, client-side productivity dashboard delivered as three fi
     - **Validates: Requirements 7.2**
     - Use `fc.uuid()` or a generated task id; assert two successive `toggle(id)` calls restore the original `completed` value
 
-  - [~] 8.6 Write `PPD.Tasks.init` and `PPD.Tasks.setSort`; add task HTML controls
+  - [x] 8.6 Write `PPD.Tasks.init` and `PPD.Tasks.setSort`; add task HTML controls
     - Implement `setSort(option)`: persist sort option to `ppd_sortOption`; re-render
     - Implement `init()`: load tasks from `ppd_tasks` (default `[]` on missing/malformed data); load sort option (default `"default"`); render list
     - Add task input, Add button, sort dropdown, and task list container to `index.html` inside `#panel-tasks`
     - _Requirements: 5.7, 5.8, 8.1, 8.3, 8.4_
 
-- [~] 9. Checkpoint — Ensure Timer and Tasks modules pass all tests and render correctly
+- [-] 9. Checkpoint — Ensure Timer and Tasks modules pass all tests and render correctly
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 10. Implement `PPD.Links` module
-  - [~] 10.1 Write `PPD.Links` data helpers: `validateURL`, `persist`, and data model
+  - [ ] 10.1 Write `PPD.Links` data helpers: `validateURL`, `persist`, and data model
     - Implement `validateURL(url)`: returns `true` if url starts with `http://` or `https://` and length ≤ 2048; `false` otherwise
     - Implement `persist()`: write links array to `ppd_links` via `PPD.Storage.set`
     - Define the Link schema (`id`, `label`, `url`)
