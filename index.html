@@ -1,120 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Personal Productivity Dashboard — greeting, focus timer, tasks, and quick links." />
-    <title>Personal Productivity Dashboard</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <script>
-      /* Inline theme init — must run before body renders to prevent flash of wrong theme */
-      (function () {
-        var theme;
-        try {
-          theme = localStorage.getItem('ppd_theme');
-        } catch (e) {
-          theme = null;
-        }
-        if (theme !== 'light' && theme !== 'dark') {
-          theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
-            ? 'dark'
-            : 'light';
-        }
-        document.documentElement.setAttribute('data-theme', theme);
-      }());
-    </script>
-  </head>
-  <body>
-    <button id="btn-theme-toggle" aria-label="Switch to dark theme">🌙 Dark</button>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List Life Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    
+    <!-- Top Header Card: Clock, Date, Greeting -->
+    <header class="card header-card">
+      <div id="clock" class="clock-display">00:00:00</div>
+      <div id="date" class="date-display">Loading date...</div>
+      <h1 id="greeting" class="greeting-text">Good Morning</h1>
+      <div class="name-container">
+        <input type="text" id="nameInput" placeholder="Enter your name..." />
+        <button id="saveNameBtn">Save Name</button>
+      </div>
+    </header>
 
-    <div id="app">
-      <section id="panel-greeting" aria-label="Greeting panel">
-        <div class="greeting-content">
-          <p id="greeting-time" class="greeting-time" aria-live="polite" aria-label="Current time">--:--</p>
-          <p id="greeting-date" class="greeting-date">--</p>
-          <h1 id="greeting-text" class="greeting-text">Good morning</h1>
-        </div>
-        <div class="greeting-name-form">
-          <label for="input-display-name" class="form-label">Your name</label>
-          <div class="input-row">
-            <input
-              type="text"
-              id="input-display-name"
-              class="form-input"
-              placeholder="Enter your name"
-              maxlength="50"
-              aria-describedby="name-error"
-            />
-            <button id="btn-save-name" class="btn btn-primary">Save</button>
-          </div>
-          <span id="name-error" class="error-msg" role="alert" hidden></span>
-        </div>
-      </section>
-
-      <section id="panel-timer" aria-label="Focus timer panel">
-        <h2 class="panel-title">Focus Timer</h2>
-        <div class="timer-display-wrapper">
-          <p id="timer-display" class="timer-display" role="timer" aria-live="off" aria-label="Timer countdown">25:00</p>
-        </div>
+    <!-- Main Grid Layout -->
+    <main class="dashboard-grid">
+      
+      <!-- Focus Timer Card -->
+      <section class="card timer-card">
+        <h2>Focus Timer</h2>
+        <div id="timerDisplay" class="timer-display">25:00</div>
         <div class="timer-controls">
-          <button id="btn-timer-start" class="btn btn-primary" aria-label="Start timer">Start</button>
-          <button id="btn-timer-stop" class="btn btn-secondary" aria-label="Stop timer" disabled>Stop</button>
-          <button id="btn-timer-reset" class="btn btn-secondary" aria-label="Reset timer">Reset</button>
+          <button id="startTimerBtn" class="btn btn-primary">Start</button>
+          <button id="stopTimerBtn" class="btn btn-secondary">Stop</button>
+          <button id="resetTimerBtn" class="btn btn-secondary">Reset</button>
         </div>
-        <div class="timer-duration-form">
-          <label for="input-timer-duration" class="form-label">Duration (minutes)</label>
-          <div class="input-row">
-            <input
-              type="number"
-              id="input-timer-duration"
-              class="form-input"
-              value="25"
-              min="1"
-              max="90"
-              step="1"
-              aria-describedby="timer-duration-error"
-              aria-label="Session duration in minutes"
-            />
-            <button id="btn-timer-set-duration" class="btn btn-primary">Set</button>
-          </div>
-          <span id="timer-duration-error" class="error-msg" role="alert" hidden></span>
+        <div class="custom-timer">
+          <input type="number" id="customMinutes" placeholder="Mins" min="1" max="120" value="25">
+          <button id="setTimerBtn" class="btn btn-small">Set Time</button>
         </div>
       </section>
 
-      <section id="panel-tasks" aria-label="Task manager panel">
-        <h2 class="panel-title">To-Do List</h2>
-        <div class="task-add-form">
-          <label for="input-add-task" class="form-label">New task</label>
-          <div class="input-row">
-            <input
-              type="text"
-              id="input-add-task"
-              class="form-input"
-              placeholder="Add a new task…"
-              maxlength="200"
-              aria-label="New task description"
-            />
-            <button id="btn-add-task" class="btn btn-primary" aria-label="Add task">Add</button>
-          </div>
-        </div>
-        <div class="task-sort-row">
-          <label for="select-task-sort" class="form-label">Sort by</label>
-          <select id="select-task-sort" class="form-select" aria-label="Sort tasks">
-            <option value="default">Default (creation order)</option>
-            <option value="az">A–Z</option>
-            <option value="za">Z–A</option>
-            <option value="incomplete_first">Incomplete first</option>
-            <option value="complete_first">Complete first</option>
-          </select>
-        </div>
-        <ul id="task-list" class="task-list" aria-live="polite" aria-label="Task list"></ul>
+      <!-- Tasks Card -->
+      <section class="card tasks-card">
+        <h2>Tasks</h2>
+        <form id="taskForm" class="input-group">
+          <input type="text" id="taskInput" placeholder="Add a new task..." required />
+          <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+        <p id="taskError" class="error-msg"></p>
+        <ul id="taskList" class="task-list"></ul>
       </section>
 
-      <section id="panel-links" aria-label="Quick links panel">
-        <!-- Quick links controls will be populated here -->
+      <!-- Quick Links Card -->
+      <section class="card links-card">
+        <h2>Quick Links</h2>
+        <form id="linkForm" class="input-group">
+          <input type="text" id="linkNameInput" placeholder="Link name" required />
+          <input type="url" id="linkUrlInput" placeholder="URL (https://...)" required />
+          <button type="submit" class="btn btn-primary">Add Link</button>
+        </form>
+        <div id="quickLinksContainer" class="quick-links-container"></div>
       </section>
-    </div>
 
-    <script src="js/app.js"></script>
-  </body>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
 </html>
