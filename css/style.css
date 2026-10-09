@@ -2,94 +2,111 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
 body {
-  background-color: #383260;
-  color: #2d2b4a;
+  background-color: #0f172a; /* Dark Slate Background */
+  color: #f8fafc;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 24px;
 }
 
 .dashboard-container {
   width: 100%;
-  max-width: 900px;
+  max-width: 920px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
-/* Common Card Styling */
+/* Base Card Styling */
 .card {
-  background-color: #d1d2e0;
-  border-radius: 12px;
+  background-color: #1e293b; /* Sleek Dark Slate Card */
+  border: 1px solid #334155;
+  border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
 }
 
 .card h2 {
   font-size: 1.25rem;
+  font-weight: 600;
   margin-bottom: 16px;
-  color: #2b2848;
+  color: #f1f5f9;
 }
 
 /* Header Section */
 .header-card {
   text-align: center;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid #334155;
 }
 
 .clock-display {
-  font-size: 2.8rem;
-  font-weight: 600;
-  color: #4b4885;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #2dd4bf; /* Mint Teal Accent */
+  letter-spacing: 1px;
 }
 
 .date-display {
-  font-size: 1rem;
-  color: #666388;
+  font-size: 0.95rem;
+  color: #94a3b8;
   margin-top: 4px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .greeting-text {
-  font-size: 1.8rem;
+  font-size: 1.75rem;
   font-weight: 700;
-  color: #22203d;
+  color: #f8fafc;
 }
 
 .name-container {
-  margin-top: 12px;
+  margin-top: 14px;
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .name-container input {
-  padding: 6px 12px;
-  border: 1px solid #b0b1c5;
-  border-radius: 6px;
+  padding: 8px 14px;
+  background-color: #334155;
+  color: #f8fafc;
+  border: 1px solid #475569;
+  border-radius: 8px;
   outline: none;
   font-size: 0.9rem;
 }
 
+.name-container input::placeholder {
+  color: #94a3b8;
+}
+
 .name-container button {
-  padding: 6px 12px;
-  background-color: #4b4885;
+  padding: 8px 16px;
+  background-color: #0d9488;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.name-container button:hover {
+  background-color: #0f766e;
 }
 
 /* Layout Grid */
 .dashboard-grid {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
-  gap: 20px;
+  gap: 24px;
 }
 
 .links-card {
@@ -113,16 +130,16 @@ body {
 }
 
 .timer-display {
-  font-size: 3.5rem;
+  font-size: 3.8rem;
   font-weight: 700;
-  color: #4b4885;
-  margin: 10px 0;
+  color: #38bdf8; /* Bright Sky Blue */
+  margin: 8px 0;
 }
 
 .timer-controls {
   display: flex;
   gap: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
 }
 
 .custom-timer {
@@ -132,27 +149,36 @@ body {
 }
 
 .custom-timer input {
-  width: 70px;
-  padding: 6px;
-  border-radius: 6px;
-  border: 1px solid #b0b1c5;
+  width: 75px;
+  padding: 7px;
+  background-color: #334155;
+  color: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #475569;
   text-align: center;
+  font-size: 0.9rem;
 }
 
 /* Tasks Section */
 .input-group {
   display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 14px;
 }
 
 .input-group input {
   flex: 1;
   padding: 10px 14px;
-  border-radius: 6px;
-  border: 1px solid #b0b1c5;
+  border-radius: 8px;
+  border: 1px solid #475569;
   font-size: 0.95rem;
-  background-color: #e5e6f0;
+  background-color: #334155;
+  color: #f8fafc;
+  outline: none;
+}
+
+.input-group input::placeholder {
+  color: #94a3b8;
 }
 
 .task-list {
@@ -168,34 +194,44 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 12px;
-  background-color: #e0e1ed;
-  border-radius: 6px;
+  padding: 10px 14px;
+  background-color: #334155;
+  border-radius: 8px;
+  border: 1px solid #475569;
 }
 
 .task-left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+}
+
+.task-left input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #0d9488;
+  cursor: pointer;
 }
 
 .task-left.completed span {
   text-decoration: line-through;
-  color: #88869e;
+  color: #64748b;
 }
 
 .btn-delete {
-  background-color: #d9534f;
+  background-color: #ef4444;
   color: white;
   border: none;
   padding: 6px 12px;
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.85rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
 }
 
 .btn-delete:hover {
-  background-color: #c9302c;
+  background-color: #dc2626;
 }
 
 /* Quick Links Section */
@@ -203,14 +239,14 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .link-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: #4b4885;
+  background-color: #0284c7; /* Sky Blue Button */
   color: white;
   padding: 8px 14px;
   border-radius: 8px;
@@ -221,44 +257,54 @@ body {
 }
 
 .link-btn:hover {
-  background-color: #3b386d;
+  background-color: #0369a1;
 }
 
 .link-btn span.close-link {
   font-weight: bold;
   cursor: pointer;
   margin-left: 4px;
+  opacity: 0.8;
 }
 
-/* General Buttons */
+.link-btn span.close-link:hover {
+  opacity: 1;
+}
+
+/* Buttons */
 .btn {
   padding: 8px 16px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
   font-weight: 600;
   font-size: 0.9rem;
+  transition: opacity 0.2s;
+}
+
+.btn:hover {
+  opacity: 0.9;
 }
 
 .btn-primary {
-  background-color: #4b4885;
+  background-color: #0d9488;
   color: white;
 }
 
 .btn-secondary {
-  background-color: #a3a4be;
-  color: #1e1d36;
+  background-color: #475569;
+  color: #f8fafc;
 }
 
 .btn-small {
-  padding: 6px 12px;
+  padding: 7px 12px;
   font-size: 0.85rem;
-  background-color: #4b4885;
+  background-color: #0d9488;
   color: white;
 }
 
 .error-msg {
-  color: #d9534f;
+  color: #f87171;
   font-size: 0.85rem;
   margin-bottom: 8px;
 }
