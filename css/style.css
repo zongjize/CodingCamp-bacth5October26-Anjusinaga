@@ -1,38 +1,264 @@
-/* ==========================================================================
-   Personal Productivity Dashboard — Main Stylesheet
-   ========================================================================== */
-
-/* --------------------------------------------------------------------------
-   Design Tokens — CSS Custom Properties
-   Light theme values are defined on :root (default).
-   Dark theme values override them via [data-theme="dark"] on <html>.
-   -------------------------------------------------------------------------- */
-:root {
-  --color-bg:         #f5f5f5;
-  --color-surface:    #ffffff;
-  --color-border:     #e0e0e0;
-  --color-text:       #1a1a1a;
-  --color-text-muted: #666666;
-  --color-accent:     #4a6fa5;
-  --color-accent-alt: #e8edf5;
-  --color-error:      #c0392b;
-  --color-success:    #27ae60;
-  --color-warning:    #e67e22;
-  --shadow-card:      0 2px 8px rgba(0, 0, 0, 0.08);
-  --radius-card:      12px;
-  --font-family:      system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-[data-theme="dark"] {
-  --color-bg:         #1a1a2e;
-  --color-surface:    #16213e;
-  --color-border:     #2a2a4a;
-  --color-text:       #e8e8f0;
-  --color-text-muted: #9090b0;
-  --color-accent:     #7b9ccf;
-  --color-accent-alt: #1f2f4a;
-  --color-error:      #e07070;
-  --color-success:    #5db87a;
-  --color-warning:    #f0a855;
-  --shadow-card:      0 2px 8px rgba(0, 0, 0, 0.4);
+body {
+  background-color: #383260;
+  color: #2d2b4a;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.dashboard-container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Common Card Styling */
+.card {
+  background-color: #d1d2e0;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+  color: #2b2848;
+}
+
+/* Header Section */
+.header-card {
+  text-align: center;
+}
+
+.clock-display {
+  font-size: 2.8rem;
+  font-weight: 600;
+  color: #4b4885;
+}
+
+.date-display {
+  font-size: 1rem;
+  color: #666388;
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+
+.greeting-text {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #22203d;
+}
+
+.name-container {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.name-container input {
+  padding: 6px 12px;
+  border: 1px solid #b0b1c5;
+  border-radius: 6px;
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.name-container button {
+  padding: 6px 12px;
+  background-color: #4b4885;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Layout Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 20px;
+}
+
+.links-card {
+  grid-column: 1 / 2;
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .links-card {
+    grid-column: auto;
+  }
+}
+
+/* Focus Timer Section */
+.timer-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer-display {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #4b4885;
+  margin: 10px 0;
+}
+
+.timer-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.custom-timer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.custom-timer input {
+  width: 70px;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #b0b1c5;
+  text-align: center;
+}
+
+/* Tasks Section */
+.input-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.input-group input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #b0b1c5;
+  font-size: 0.95rem;
+  background-color: #e5e6f0;
+}
+
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background-color: #e0e1ed;
+  border-radius: 6px;
+}
+
+.task-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.task-left.completed span {
+  text-decoration: line-through;
+  color: #88869e;
+}
+
+.btn-delete {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.btn-delete:hover {
+  background-color: #c9302c;
+}
+
+/* Quick Links Section */
+.quick-links-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #4b4885;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.link-btn:hover {
+  background-color: #3b386d;
+}
+
+.link-btn span.close-link {
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+/* General Buttons */
+.btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.btn-primary {
+  background-color: #4b4885;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #a3a4be;
+  color: #1e1d36;
+}
+
+.btn-small {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  background-color: #4b4885;
+  color: white;
+}
+
+.error-msg {
+  color: #d9534f;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
 }
